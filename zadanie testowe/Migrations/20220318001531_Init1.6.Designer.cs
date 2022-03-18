@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zadanie_testowe.Controllers;
 
 namespace zadanie_testowe.Migrations
 {
     [DbContext(typeof(ToDoTaskDbContext))]
-    partial class ToDoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220318001531_Init1.6")]
+    partial class Init16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +36,9 @@ namespace zadanie_testowe.Migrations
 
                     b.Property<int>("PercentComplete")
                         .HasColumnType("int");
+
+                    b.Property<double>("TimeToExpiry")
+                        .HasColumnType("double");
 
                     b.Property<string>("Tittle")
                         .IsRequired()

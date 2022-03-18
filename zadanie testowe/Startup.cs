@@ -31,6 +31,7 @@ namespace zadanie_testowe
             services.AddDbContext<ToDoTaskDbContext>();
             services.AddScoped<ToDoTaskSeeder>();
             services.AddScoped<IToDoTaskService, ToDoTaskService>();
+            services.AddAutoMapper(this.GetType().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Inserting sample values into the database
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,7 +43,6 @@ namespace zadanie_testowe
                     Description = "najlepiej w Lidlu",
                     PercentComplete = 0,
                     DateOfExpiry = new DateTime(2022, 03, 20, 12, 30, 0),
-                    TimeToExpiry = Math.Round((timeToExpiry1.Subtract(DateTime.Now).TotalHours), 0),
                 },
 
                 new ToDoTask()
@@ -50,7 +51,6 @@ namespace zadanie_testowe
                     Description = "bilet do kina na poniedziałek na batmana",
                     PercentComplete = 0,
                     DateOfExpiry = new DateTime(2022, 03, 24, 20, 40, 0),
-                    TimeToExpiry = Math.Round((timeToExpiry2.Subtract(DateTime.Now).TotalHours), 0),
                 }
             };
 

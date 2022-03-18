@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using zadanie_testowe.Models;
 using zadanie_testowe.Services;
 
 namespace zadanie_testowe.Controllers
@@ -11,10 +13,12 @@ namespace zadanie_testowe.Controllers
     public class ToDoTaskController : ControllerBase
     {
         private readonly IToDoTaskService _toDoTaskService;
+        private readonly IMapper _mapper;
 
-        public ToDoTaskController(IToDoTaskService toDoTaskService)
+        public ToDoTaskController(IToDoTaskService toDoTaskService, IMapper mapper)
         {
             _toDoTaskService = toDoTaskService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -56,6 +60,88 @@ namespace zadanie_testowe.Controllers
 
             return Ok(tasks);
         }
+
+
+        [HttpPost]
+        public ActionResult CreateTask([FromBody] ToDoTaskDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var isCreated = _toDoTaskService.CreateTask(dto);
+
+            if (!isCreated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateTask([FromBody] ToDoTaskDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var isUpdated = _toDoTaskService.UpdateTask(dto, id);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("percent/{id}")]
+        public ActionResult SetPercentComplete([FromQuery] int percentComplete, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var isSet = _toDoTaskService.SetPercentComplete(percentComplete, id);
+
+            if (!isSet)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("done/{id}")]
+        public ActionResult SetAsDone([FromRoute] int id)
+        {
+            var isSet = _toDoTaskService.SetAsDone(id);
+
+            if (!isSet)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteTask([FromRoute] int id)
+        {
+            var isDeleted = _toDoTaskService.DeleteTask(id);
+
+            if (!isDeleted)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
+        }
+
 
     }
 }

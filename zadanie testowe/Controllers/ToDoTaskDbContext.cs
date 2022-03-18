@@ -17,6 +17,7 @@ namespace zadanie_testowe.Controllers
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Set tittle as required value.
             modelBuilder.Entity<ToDoTask>()
                 .Property(t => t.Tittle)
                 .IsRequired();

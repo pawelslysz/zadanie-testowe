@@ -1,17 +1,16 @@
-﻿using System;
+﻿// Model Dto for creating and updating ToDoTask 
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace zadanie_testowe.Controllers
+namespace zadanie_testowe.Models
 {
-    public class ToDoTask
+    public class ToDoTaskDto
     {
-        public int Id { get; set; }
         public string Tittle { get; set; }
         public string Description { get; set; }
-        public int PercentComplete { get; set; }
         public DateTime DateOfExpiry { get; set; }
-        public bool IsDone { get; set; }
     }
 }
